@@ -48,7 +48,11 @@ https
       });
     }
 
-    if (pathName !== '/' && pathName !== '/about') {
+    if (
+      pathName !== '/' &&
+      pathName !== '/about' &&
+      pathName !== '/contact-me'
+    ) {
       fs.readFile('./404.html', (err, data) => {
         if (err) {
           res.writeHead(404, { 'Conten-Type': 'text/html' });
