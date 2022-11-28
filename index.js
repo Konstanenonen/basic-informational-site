@@ -1,8 +1,8 @@
-const https = require('http');
+const http = require('http');
 const url = require('url');
 const fs = require('fs');
 
-https
+http
   .createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
 
