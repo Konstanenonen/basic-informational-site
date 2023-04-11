@@ -42,6 +42,29 @@ app.get('/contact-me', (req, res) => {
   });
 });
 
+app.use(function (req, res, next) {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+app.use((error, req, res, next) => {
+  console.log('this is the error', error);
+
+  if (error.status === 404) {
+    fs.readFile('./404.html', (err, data) => {
+      if (err) {
+        res.writeHead(404, { 'Conten-Type': 'text/html' });
+        return res.end('404 There is nothing here');
+      }
+
+      res.writeHead(404, { 'Content-Type': 'text/html' });
+      res.write(data);
+      return res.end();
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
